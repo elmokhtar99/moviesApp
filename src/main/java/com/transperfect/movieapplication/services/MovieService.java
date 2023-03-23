@@ -5,7 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class MovieService implements IMovieService{
@@ -52,6 +51,7 @@ public class MovieService implements IMovieService{
         return this.getAllMovies()
                 .stream()
                 .filter(movie -> movie.getGenre().compareTo(genre)==0)
-                .collect(Collectors.toList());
+                .sorted((m1, m2) -> Integer.compare(m2.getReleaseYear(), m1.getReleaseYear()))
+                .toList();
     }
 }
